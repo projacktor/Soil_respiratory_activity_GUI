@@ -1,5 +1,4 @@
 /venv
 relation_action.py
-.env
 main.py
-/ui_templeate
+/ui_template
