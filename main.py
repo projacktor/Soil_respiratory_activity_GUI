@@ -1,6 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from Main_class import MainWindow
+from main_Ui import MainWindow
 
 
 def main():
