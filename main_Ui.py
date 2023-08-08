@@ -1,9 +1,7 @@
 from PyQt5 import QtWidgets
-
+from PyQt5.QtGui import QDoubleValidator
 from App_UI import Ui_MainWindow
-
-"""TODO: прописать ввод для line_edit
-прописать вывод для text_edit"""
+from eval import *
 
 
 class MainWindow(object):
@@ -19,30 +17,115 @@ class MainWindow(object):
     def show(self):
         self.main_window.show()
 
+    # initializing buttons
     def buttons(self):
-        # home screen
-        self.ui.LabGKHBtn.clicked.connect(self.switch_to_lab_gkh)
-        self.ui.LabTitrBtn.clicked.connect(self.switch_to_lab_titr)
-        self.ui.FieldGKHBtn.clicked.connect(self.switch_to_field_gkh)
-        self.ui.FieldCO2Btn.clicked.connect(self.switch_to_field_co2)
+        # home screen buttons
+        self.ui.lab_gkh_btn.clicked.connect(self.switch_to_lab_gkh)
+        self.ui.lab_titr_btn.clicked.connect(self.switch_to_lab_titr)
+        self.ui.field_co2_btn.clicked.connect(self.switch_to_field_co2)
+        self.ui.field_gkh_btn.clicked.connect(self.switch_to_field_gkh)
         self.ui.Exel.clicked.connect(self.switch_to_exel)
         # back buttons
         self.ui.lab_gkh_back_home_btn.clicked.connect(self.back_home)
         self.ui.lab_titr_back_home_btn.clicked.connect(self.back_home)
-        self.ui.field_GKH_back_home_btn.clicked.connect(self.back_home)
-        self.ui.field_CO2_back_home_btn.clicked.connect(self.back_home)
+        self.ui.field_co2_back_home_btn.clicked.connect(self.back_home)
+        self.ui.field_gkh_back_home_btn.clicked.connect(self.back_home)
+        # input buttons
+        self.ui.input_lab_gkh.clicked.connect(self.input_lab_gkh)
+        self.ui.input_lab_titr_btn.clicked.connect(self.input_lab_titr)
+        self.ui.input_field_co2_btn.clicked.connect(self.input_field_co2)
+        self.ui.input_field_gkh_btn.clicked.connect(self.input_field_gkh)
+
+    def input_lab_gkh(self):
+        try:
+            if all(float(i) for i in [self.ui.cCO2_lab_gkh_hol_le.text(), self.ui.cCO2_lab_gkh_soil_le.text(),
+                                      self.ui.air_vol_lab_gkh_le.text(), self.ui.inc_temp_lab_gkh_le.text(),
+                                      self.ui.pres_lab_gkh_le.text(), self.ui.soil_nav_lab_gkh_le.text(),
+                                      self.ui.soil_hum_lab_gkh_le.text(), self.ui.inc_time_lab_gkh_le.text()]):
+                x = float(self.ui.cCO2_lab_gkh_hol_le.text())
+                o = float(self.ui.cCO2_lab_gkh_soil_le.text())
+                b1 = float(self.ui.air_vol_lab_gkh_le.text())
+                t = float(self.ui.inc_temp_lab_gkh_le.text())
+                d = float(self.ui.pres_lab_gkh_le.text())
+                m = float(self.ui.soil_nav_lab_gkh_le.text())
+                b2 = float(self.ui.soil_hum_lab_gkh_le.text())
+                # print(b2, self.ui.soil_hum_lab_gkh_le.text())
+                e = float(self.ui.inc_time_lab_gkh_le.text())
+                RA = lab_gkh(x, o, b1, t, d, m, b2, e)
+                # print(RA)
+                self.ui.output_lab_gkh_te.clear()
+                self.ui.output_lab_gkh_te.setText(str(RA))
+                """TODO: сделать перевод между ЕИ"""
+        except ValueError:
+            self.ui.output_lab_gkh_te.clear()
+            self.ui.output_lab_gkh_te.setText('Введите цифры!')
+
+    def input_lab_titr(self):
+        try:
+            if all(float(i) for i in [self.ui.vol_titr_lab_hol_le.text(), self.ui.vol_titr_lab_exp_le.text(),
+                                      self.ui.soil_m_lab_titr_le.text(), self.ui.inc_temp_lab_titr_le.text()]):
+                x = float(self.ui.vol_titr_lab_hol_le.text())
+                o = float(self.ui.vol_titr_lab_exp_le.text())
+                m = float(self.ui.soil_m_lab_titr_le.text())
+                e = float(self.ui.inc_temp_lab_titr_le.text())
+                RA = lab_titr(x, o, m, e)
+                self.ui.output_lab_titr_te.clear()
+                self.ui.output_lab_titr_te.append(str(RA))
+                """TODO: сделать перевод между ЕИ"""
+        except ValueError:
+            self.ui.output_lab_titr_te.clear()
+            self.ui.output_lab_titr_te.append('Введите цифры!')
+
+    def input_field_co2(self):
+        try:
+            if all(float(i) for i in [self.ui.cCO2_before_field_co2_le.text(), self.ui.cCO2_after_field_co2_le.text(),
+                                      self.ui.camera_h_field_co2_le.text(), self.ui.camera_d_field_co2_le.text(),
+                                      self.ui.temp_field_co2_le.text(), self.ui.inc_time_field_co2_le.text()]):
+                x = float(self.ui.cCO2_before_field_co2_le.text())
+                o = float(self.ui.cCO2_after_field_co2_le.text())
+                h = float(self.ui.camera_h_field_co2_le.text())
+                d = float(self.ui.camera_d_field_co2_le.text())
+                t = float(self.ui.temp_field_co2_le.text())
+                e = float(self.ui.inc_time_field_co2_le.text())
+
+                RA = field_co2(x, o, h, d, t, e)
+                self.ui.output_field_co2_te.clear()
+                self.ui.output_field_co2_te.append(str(RA))
+        except ValueError:
+            self.ui.output_field_co2_te.clear()
+            self.ui.output_field_co2_te.append('Введите цифры!')
+
+    def input_field_gkh(self):
+        try:
+            if all(float(i) for i in [self.ui.cCO2_before_field_gkh_le.text(), self.ui.cCO2_after_field_gkh_le.text(),
+                                      self.ui.camera_high_field_gkh_le.text(), self.ui.camera_l1_field_gkh_le.text(),
+                                      self.ui.camera_l2_field_gkh_le.text(), self.ui.temp_field_gkh_le.text(),
+                                      self.ui.inc_time_field_gkh_le.text()]):
+                x = float(self.ui.cCO2_before_field_gkh_le.text())
+                o = float(self.ui.cCO2_after_field_gkh_le.text())
+                h = float(self.ui.camera_high_field_gkh_le.text())
+                l1 = float(self.ui.camera_l1_field_gkh_le.text())
+                l2 = float(self.ui.camera_l2_field_gkh_le.text())
+                t = float(self.ui.temp_field_gkh_le.text())
+                e = float(self.ui.inc_time_field_gkh_le.text())
+                RA = field_gkh(x, o, h, l1, l2, t, e)
+                self.ui.output_field_gkh_te.clear()
+                self.ui.output_field_gkh_te.append(str(RA))
+        except ValueError:
+            self.ui.output_field_gkh_te.clear()
+            self.ui.output_field_gkh_te.append('Введите цифры!')
 
     def switch_to_lab_gkh(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.lab_GKH_eval)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.lab_gkh_eval_lt)
 
     def switch_to_lab_titr(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.lab_titrovaniye_eval)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.lab_titr_eval_lt)
 
     def switch_to_field_gkh(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.field_GKH_eval)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.field_gkh_eval_lt)
 
     def switch_to_field_co2(self):
-        self.ui.stackedWidget.setCurrentWidget(self.ui.field_CO2_eval)
+        self.ui.stackedWidget.setCurrentWidget(self.ui.field_co2_eval_lt)
 
     def switch_to_exel(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.EXEL)
