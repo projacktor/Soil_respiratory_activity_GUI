@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtGui import QDoubleValidator
 from App_UI import Ui_MainWindow
 from eval import *
 
@@ -53,9 +52,14 @@ class MainWindow(object):
                 e = float(self.ui.inc_time_lab_gkh_le.text())
                 RA = lab_gkh(x, o, b1, t, d, m, b2, e)
                 # print(RA)
-                self.ui.output_lab_gkh_te.clear()
-                self.ui.output_lab_gkh_te.setText(str(RA))
-                """TODO: сделать перевод между ЕИ"""
+                if self.ui.gram_lab_gkh_RB.isChecked():
+                    self.ui.output_lab_gkh_te.clear()
+                    self.ui.output_lab_gkh_te.setText(str(RA))
+                elif self.ui.sq_meters_lab_gkh_RB.isChecked():
+                    # function that will convert mcg_of_CO2/(gr*h) to g_of_CO2/(m2*h)
+                    RA = converter_from_GPerGH_to_GPerM2H(RA, "micro")
+                    self.ui.output_lab_gkh_te.clear()
+                    self.ui.output_lab_gkh_te.setText(str(RA))
         except ValueError:
             self.ui.output_lab_gkh_te.clear()
             self.ui.output_lab_gkh_te.setText('Введите цифры!')
@@ -69,9 +73,13 @@ class MainWindow(object):
                 m = float(self.ui.soil_m_lab_titr_le.text())
                 e = float(self.ui.inc_temp_lab_titr_le.text())
                 RA = lab_titr(x, o, m, e)
-                self.ui.output_lab_titr_te.clear()
-                self.ui.output_lab_titr_te.append(str(RA))
-                """TODO: сделать перевод между ЕИ"""
+                if self.ui.gram_lab_titr_RB.isChecked():
+                    self.ui.output_lab_titr_te.clear()
+                    self.ui.output_lab_titr_te.append(str(RA))
+                elif self.ui.sq_meters_lab_titr_RB.isChecked():
+                    self.ui.output_lab_titr_te.clear()
+                    RA = converter_from_GPerGH_to_GPerM2H(RA, "milli")
+                    self.ui.output_lab_titr_te.append(str(RA))
         except ValueError:
             self.ui.output_lab_titr_te.clear()
             self.ui.output_lab_titr_te.append('Введите цифры!')
@@ -87,10 +95,22 @@ class MainWindow(object):
                 d = float(self.ui.camera_d_field_co2_le.text())
                 t = float(self.ui.temp_field_co2_le.text())
                 e = float(self.ui.inc_time_field_co2_le.text())
-
                 RA = field_co2(x, o, h, d, t, e)
-                self.ui.output_field_co2_te.clear()
-                self.ui.output_field_co2_te.append(str(RA))
+                if self.ui.sq_meters_field_co2_RB.isChecked():
+                    self.ui.output_field_co2_te.clear()
+                    self.ui.output_field_co2_te.append(str(RA))
+                elif self.ui.g_gram_field_co2_RB.isChecked():
+                    self.ui.output_field_co2_te.clear()
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "no")
+                    self.ui.output_field_co2_te.append(str(RA))
+                elif self.ui.mg_gram_field_co2_RB.isChecked():
+                    self.ui.output_field_co2_te.clear()
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "milli")
+                    self.ui.output_field_co2_te.append(str(RA))
+                elif self.ui.mcg_gram_field_co2_RB.isChecked():
+                    self.ui.output_field_co2_te.clear()
+                    RA = converter_from_GPerGH_to_GPerM2H(RA, "micro")
+                    self.ui.output_field_co2_te.append(str(RA))
         except ValueError:
             self.ui.output_field_co2_te.clear()
             self.ui.output_field_co2_te.append('Введите цифры!')
@@ -109,8 +129,21 @@ class MainWindow(object):
                 t = float(self.ui.temp_field_gkh_le.text())
                 e = float(self.ui.inc_time_field_gkh_le.text())
                 RA = field_gkh(x, o, h, l1, l2, t, e)
-                self.ui.output_field_gkh_te.clear()
-                self.ui.output_field_gkh_te.append(str(RA))
+                if self.ui.sq_meters_field_gkh_RB.isChecked():
+                    self.ui.output_field_gkh_te.clear()
+                    self.ui.output_field_gkh_te.append(str(RA))
+                elif self.ui.g_gram_field_gkh_RB.isChecked():
+                    self.ui.output_field_gkh_te.clear()
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "no")
+                    self.ui.output_field_gkh_te.append(str(RA))
+                elif self.ui.mg_gram_field_gkh_RB.isChecked():
+                    self.ui.output_field_gkh_te.clear()
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "milli")
+                    self.ui.output_field_gkh_te.append(str(RA))
+                elif self.ui.mcg_gram_field_gkh_RB.isChecked():
+                    self.ui.output_field_gkh_te.clear()
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "micro")
+                    self.ui.output_field_gkh_te.append(str(RA))
         except ValueError:
             self.ui.output_field_gkh_te.clear()
             self.ui.output_field_gkh_te.append('Введите цифры!')

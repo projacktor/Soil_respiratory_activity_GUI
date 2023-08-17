@@ -1,5 +1,5 @@
 /venv
-relation_action.py
+tester.py
 MainWindowUI.py
 /ui_template
 old_pattern_main.py

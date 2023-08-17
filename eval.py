@@ -1,6 +1,5 @@
-import numpy as np
 from math import pi
-"""TODO: написать логику вычислений"""
+"""TODO: написать логику перевода из СИ"""
 
 
 def lab_gkh(x, o, b1, t, d, m, b2, e):
@@ -31,5 +30,22 @@ def field_gkh(x, o, h, l1, l2, t, e):
     return RA
 
 
-def convert_from_gr_to_m2(co2_p_gr):
-    pass
+def converter_from_GPerGH_to_GPerM2H(measure, power):
+    # 10**5 g/(g*h) -> g/(m2*h); 10**8 mg/(g*h) -> g;/(m2*h) 10**12 mcg/(g*h) -> g/(m2*h)
+    if power == "micro":
+        converted = measure * 3 * 10**11
+    if power == "milli":
+        converted = measure * 3 * 10**7
+    if power == "no":
+        converted = measure * 3 * 10**4
+    return converted
+
+
+def converter_from_GPerM2H_to_GPerGH(measure, power):
+    if power == "micro":
+        converted = measure * 3 * 10**-11
+    if power == "milli":
+        converted = measure * 3 * 10**-7
+    if power == "no":
+        converted = measure * 3 * 10**-5
+    return converted
