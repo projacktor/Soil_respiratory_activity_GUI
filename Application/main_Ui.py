@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
-from Application.App_UI import Ui_MainWindow
-from Application.eval import *
+from App_UI import Ui_MainWindow
+from eval import *
 
 
 class MainWindow(object):
