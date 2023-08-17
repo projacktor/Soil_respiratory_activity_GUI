@@ -1,6 +1,7 @@
 /venv
+/MainWindowUI.py
 tester.py
-ui_template/MainWindowUI.py
-ui_template/App_UI_old_1.py
+/App_UI_old_1.py
+/old_pattern_main.py
 /ui_template
-ui_template/old_pattern_main.py
+/notes.txt

@@ -1,10 +1,11 @@
 from PyQt5 import QtWidgets
-from App_UI import Ui_MainWindow
-from eval import *
+from Application.App_UI import Ui_MainWindow
+from Application.eval import *
 
 
 class MainWindow(object):
     def __init__(self):
+        super().__init__()
         self.main_window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.main_window)

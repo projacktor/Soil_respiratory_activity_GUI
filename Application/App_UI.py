@@ -988,7 +988,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Respiratory Activity"))
         self.IntroLabel.setText(_translate("MainWindow", "Добро пожаловать! Вы находитесь в программе для расчета почвенной респираторной активности. Выберите использованный вами метод."))
         self.lab_gkh_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в лабораторных условиях на газовом хроматографе"))
         self.lab_titr_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в лабораторных условиях методом титрования"))
