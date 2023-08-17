@@ -8,7 +8,6 @@ class MainWindow(object):
         self.main_window = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.main_window)
-
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
 
         self.buttons()
@@ -29,6 +28,7 @@ class MainWindow(object):
         self.ui.lab_titr_back_home_btn.clicked.connect(self.back_home)
         self.ui.field_co2_back_home_btn.clicked.connect(self.back_home)
         self.ui.field_gkh_back_home_btn.clicked.connect(self.back_home)
+        self.ui.exel_back_home_btn.clicked.connect(self.back_home)
         # input buttons
         self.ui.input_lab_gkh.clicked.connect(self.input_lab_gkh)
         self.ui.input_lab_titr_btn.clicked.connect(self.input_lab_titr)
@@ -60,11 +60,16 @@ class MainWindow(object):
                     RA = converter_from_GPerGH_to_GPerM2H(RA, "micro")
                     self.ui.output_lab_gkh_te.clear()
                     self.ui.output_lab_gkh_te.setText(str(RA))
+                elif self.ui.mcg_sq_meters_lab_gkh_RB.isChecked():
+                    self.ui.output_lab_gkh_te.clear()
+                    RA = converter_from_GPerGH_to_GPerM2H(RA, "mcgPerM")
+                    self.ui.output_lab_gkh_te.setText(str(RA))
         except ValueError:
             self.ui.output_lab_gkh_te.clear()
             self.ui.output_lab_gkh_te.setText('Введите цифры!')
 
     def input_lab_titr(self):
+        """TODO: find the difference btw mcg & mg"""
         try:
             if all(float(i) for i in [self.ui.vol_titr_lab_hol_le.text(), self.ui.vol_titr_lab_exp_le.text(),
                                       self.ui.soil_m_lab_titr_le.text(), self.ui.inc_temp_lab_titr_le.text()]):
@@ -79,6 +84,14 @@ class MainWindow(object):
                 elif self.ui.sq_meters_lab_titr_RB.isChecked():
                     self.ui.output_lab_titr_te.clear()
                     RA = converter_from_GPerGH_to_GPerM2H(RA, "milli")
+                    self.ui.output_lab_titr_te.append(str(RA))
+                elif self.ui.mcg_gram_lab_titr_RB.isChecked():
+                    self.ui.output_lab_titr_te.clear()
+                    RA = converter_from_GPerGH_to_GPerM2H(RA, "mcgPerM")
+                    self.ui.output_lab_titr_te.append(str(RA))
+                elif self.ui.mcg_sq_meters_lab_titr_RB.isChecked():
+                    self.ui.output_lab_titr_te.clear()
+                    RA = converter_from_GPerGH_to_GPerM2H(RA, "...")
                     self.ui.output_lab_titr_te.append(str(RA))
         except ValueError:
             self.ui.output_lab_titr_te.clear()
@@ -107,7 +120,7 @@ class MainWindow(object):
                     self.ui.output_field_co2_te.clear()
                     RA = converter_from_GPerM2H_to_GPerGH(RA, "milli")
                     self.ui.output_field_co2_te.append(str(RA))
-                elif self.ui.mcg_gram_field_co2_RB.isChecked():
+                elif self.ui.mcg_sq_meters_field_co2_RB.isChecked():
                     self.ui.output_field_co2_te.clear()
                     RA = converter_from_GPerGH_to_GPerM2H(RA, "micro")
                     self.ui.output_field_co2_te.append(str(RA))
@@ -143,6 +156,10 @@ class MainWindow(object):
                 elif self.ui.mcg_gram_field_gkh_RB.isChecked():
                     self.ui.output_field_gkh_te.clear()
                     RA = converter_from_GPerM2H_to_GPerGH(RA, "micro")
+                    self.ui.output_field_gkh_te.append(str(RA))
+                elif self.ui.mcg_sq_meters_field_co2_RB.isChecked():
+                    self.ui.output_field_gkh_te.clear()
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "mcgPerM")
                     self.ui.output_field_gkh_te.append(str(RA))
         except ValueError:
             self.ui.output_field_gkh_te.clear()
