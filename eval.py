@@ -34,24 +34,23 @@ def converter_from_GPerGH_to_GPerM2H(measure, power):
     if power == "micro":
         converted = measure * 3 * 10**11
     elif power == "milli":
-        converted = measure * 3 * 10**7
+        converted = measure * 3 * 10**8
     elif power == "no":
-        converted = measure * 3 * 10**4
+        converted = measure * 3 * 10**5
     elif power == "mcgPerM":
-        converted = measure * 3 * 10**4 * 10**6
+        converted = measure * 3 * 10**5 * 10**6
     else:
         print("Process finished with exit code 1")
     return converted
 
 
-"""TODO: make new func that will convert mg/g*h to mcg/g*h for titr method"""
 def converter_from_GPerM2H_to_GPerGH(measure, power):
     if power == "micro":
-        converted = measure * 3 * 10**-11
+        converted = measure * 3 * 10**(-11)
     elif power == "milli":
-        converted = measure * 3 * 10**-7
+        converted = measure * 3 * 10**(-8)
     elif power == "no":
-        converted = measure * 3 * 10**-5
+        converted = measure * 3 * 10**(-5)
     elif power == "mcgPerM":
         converted = measure * 10**6
     else:

@@ -48,10 +48,8 @@ class MainWindow(object):
                 d = float(self.ui.pres_lab_gkh_le.text())
                 m = float(self.ui.soil_nav_lab_gkh_le.text())
                 b2 = float(self.ui.soil_hum_lab_gkh_le.text())
-                # print(b2, self.ui.soil_hum_lab_gkh_le.text())
                 e = float(self.ui.inc_time_lab_gkh_le.text())
-                RA = lab_gkh(x, o, b1, t, d, m, b2, e)
-                # print(RA)
+                RA = lab_gkh(x, o, b1, t, d, m, b2, e) # measure in mcgCO2/(g*h)
                 if self.ui.gram_lab_gkh_RB.isChecked():
                     self.ui.output_lab_gkh_te.clear()
                     self.ui.output_lab_gkh_te.setText(str(RA))
@@ -60,16 +58,15 @@ class MainWindow(object):
                     RA = converter_from_GPerGH_to_GPerM2H(RA, "micro")
                     self.ui.output_lab_gkh_te.clear()
                     self.ui.output_lab_gkh_te.setText(str(RA))
-                elif self.ui.mcg_sq_meters_lab_gkh_RB.isChecked():
+                elif self.ui.mcg_sq_meters_lab_gkh_RB.isChecked(): # convert mcgCO2/(g*h) to mcgCO2/(m2*h)
                     self.ui.output_lab_gkh_te.clear()
-                    RA = converter_from_GPerGH_to_GPerM2H(RA, "mcgPerM")
+                    RA = converter_from_GPerGH_to_GPerM2H(RA, "no")
                     self.ui.output_lab_gkh_te.setText(str(RA))
         except ValueError:
             self.ui.output_lab_gkh_te.clear()
-            self.ui.output_lab_gkh_te.setText('Введите цифры!')
+            self.ui.output_lab_gkh_te.setText('Введите цифры или же используйте точку, вместо запятой!')
 
     def input_lab_titr(self):
-        """TODO: find the difference btw mcg & mg"""
         try:
             if all(float(i) for i in [self.ui.vol_titr_lab_hol_le.text(), self.ui.vol_titr_lab_exp_le.text(),
                                       self.ui.soil_m_lab_titr_le.text(), self.ui.inc_temp_lab_titr_le.text()]):
@@ -77,25 +74,25 @@ class MainWindow(object):
                 o = float(self.ui.vol_titr_lab_exp_le.text())
                 m = float(self.ui.soil_m_lab_titr_le.text())
                 e = float(self.ui.inc_temp_lab_titr_le.text())
-                RA = lab_titr(x, o, m, e)
+                RA = lab_titr(x, o, m, e) # measure in mgCO2/(g*h)
                 if self.ui.gram_lab_titr_RB.isChecked():
                     self.ui.output_lab_titr_te.clear()
                     self.ui.output_lab_titr_te.append(str(RA))
-                elif self.ui.sq_meters_lab_titr_RB.isChecked():
+                elif self.ui.mcg_gram_lab_titr_RB.isChecked(): # convert mgCO2/(g*h) to mcgCO2/(g*h)
+                    self.ui.output_lab_titr_te.clear()
+                    RA *= 1000
+                    self.ui.output_lab_titr_te.append(str(RA))
+                elif self.ui.sq_meters_lab_titr_RB.isChecked(): # convert mgCO2/(g*h) to gCO2/(m2*h)
                     self.ui.output_lab_titr_te.clear()
                     RA = converter_from_GPerGH_to_GPerM2H(RA, "milli")
                     self.ui.output_lab_titr_te.append(str(RA))
-                elif self.ui.mcg_gram_lab_titr_RB.isChecked():
+                elif self.ui.mcg_sq_meters_lab_titr_RB.isChecked(): # convert mgCO2/(g*h)to mcgCo2/(m2 * h)
                     self.ui.output_lab_titr_te.clear()
                     RA = converter_from_GPerGH_to_GPerM2H(RA, "mcgPerM")
                     self.ui.output_lab_titr_te.append(str(RA))
-                elif self.ui.mcg_sq_meters_lab_titr_RB.isChecked():
-                    self.ui.output_lab_titr_te.clear()
-                    RA = converter_from_GPerGH_to_GPerM2H(RA, "...")
-                    self.ui.output_lab_titr_te.append(str(RA))
         except ValueError:
             self.ui.output_lab_titr_te.clear()
-            self.ui.output_lab_titr_te.append('Введите цифры!')
+            self.ui.output_lab_titr_te.append('Введите цифры или же используйте точку, вместо запятой!')
 
     def input_field_co2(self):
         try:
@@ -108,25 +105,33 @@ class MainWindow(object):
                 d = float(self.ui.camera_d_field_co2_le.text())
                 t = float(self.ui.temp_field_co2_le.text())
                 e = float(self.ui.inc_time_field_co2_le.text())
-                RA = field_co2(x, o, h, d, t, e)
+                RA = field_co2(x, o, h, d, t, e) # measure in gCO2/(m2*h)
                 if self.ui.sq_meters_field_co2_RB.isChecked():
                     self.ui.output_field_co2_te.clear()
                     self.ui.output_field_co2_te.append(str(RA))
-                elif self.ui.g_gram_field_co2_RB.isChecked():
+
+                if self.ui.mcg_gram_field_co2_RB.isChecked(): # convert gCO2/(m2*h) to mcgCO2/(g*h)
                     self.ui.output_field_co2_te.clear()
-                    RA = converter_from_GPerM2H_to_GPerGH(RA, "no")
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "micro")
                     self.ui.output_field_co2_te.append(str(RA))
-                elif self.ui.mg_gram_field_co2_RB.isChecked():
+
+                if self.ui.mg_gram_field_co2_RB.isChecked(): # convert gCO2/(m2*h) to mgCO2/(m2*h)
                     self.ui.output_field_co2_te.clear()
                     RA = converter_from_GPerM2H_to_GPerGH(RA, "milli")
                     self.ui.output_field_co2_te.append(str(RA))
-                elif self.ui.mcg_sq_meters_field_co2_RB.isChecked():
+
+                if self.ui.g_gram_field_co2_RB.isChecked(): # convert gCO2/(m2*h) to gCO2/(g*h)
                     self.ui.output_field_co2_te.clear()
-                    RA = converter_from_GPerGH_to_GPerM2H(RA, "micro")
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "no")
+                    self.ui.output_field_co2_te.append(str(RA))
+
+                if self.ui.mcg_sq_meters_field_co2_RB.isChecked(): # convert gCO2/(m2*h) to mcgCO2/(m2*h)
+                    self.ui.output_field_co2_te.clear()
+                    RA *= 10**6
                     self.ui.output_field_co2_te.append(str(RA))
         except ValueError:
             self.ui.output_field_co2_te.clear()
-            self.ui.output_field_co2_te.append('Введите цифры!')
+            self.ui.output_field_co2_te.append('Введите цифры или же используйте точку, вместо запятой!')
 
     def input_field_gkh(self):
         try:
@@ -141,29 +146,34 @@ class MainWindow(object):
                 l2 = float(self.ui.camera_l2_field_gkh_le.text())
                 t = float(self.ui.temp_field_gkh_le.text())
                 e = float(self.ui.inc_time_field_gkh_le.text())
-                RA = field_gkh(x, o, h, l1, l2, t, e)
+                RA = field_gkh(x, o, h, l1, l2, t, e) # measure in gCO2/(m2*h)
                 if self.ui.sq_meters_field_gkh_RB.isChecked():
                     self.ui.output_field_gkh_te.clear()
                     self.ui.output_field_gkh_te.append(str(RA))
-                elif self.ui.g_gram_field_gkh_RB.isChecked():
-                    self.ui.output_field_gkh_te.clear()
-                    RA = converter_from_GPerM2H_to_GPerGH(RA, "no")
-                    self.ui.output_field_gkh_te.append(str(RA))
-                elif self.ui.mg_gram_field_gkh_RB.isChecked():
-                    self.ui.output_field_gkh_te.clear()
-                    RA = converter_from_GPerM2H_to_GPerGH(RA, "milli")
-                    self.ui.output_field_gkh_te.append(str(RA))
-                elif self.ui.mcg_gram_field_gkh_RB.isChecked():
+
+                if self.ui.mcg_gram_field_gkh_RB.isChecked(): # convert gCO2/(m2*h) to mcgCO2/(g*h)
                     self.ui.output_field_gkh_te.clear()
                     RA = converter_from_GPerM2H_to_GPerGH(RA, "micro")
                     self.ui.output_field_gkh_te.append(str(RA))
-                elif self.ui.mcg_sq_meters_field_co2_RB.isChecked():
+
+                if self.ui.mg_gram_field_gkh_RB.isChecked(): # convert gCO2/(m2*h) to mgCO2/(g*h)
                     self.ui.output_field_gkh_te.clear()
-                    RA = converter_from_GPerM2H_to_GPerGH(RA, "mcgPerM")
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "milli")
                     self.ui.output_field_gkh_te.append(str(RA))
+
+                if self.ui.g_gram_field_gkh_RB.isChecked(): # convert gCO2/(m2*h) to gCO2/(g*h)
+                    self.ui.output_field_gkh_te.clear()
+                    RA = converter_from_GPerM2H_to_GPerGH(RA, "no")
+                    self.ui.output_field_gkh_te.append(str(RA))
+
+                if self.ui.mcg_sq_meters_field_gkh_RB.isChecked(): # convert gCO2/(m2*h) to mcgCO2/(m2*h)
+                    self.ui.output_field_gkh_te.clear()
+                    RA *= 10**6
+                    self.ui.output_field_gkh_te.append(str(RA))
+
         except ValueError:
             self.ui.output_field_gkh_te.clear()
-            self.ui.output_field_gkh_te.append('Введите цифры!')
+            self.ui.output_field_gkh_te.append('Введите цифры или же используйте точку, вместо запятой!')
 
     def switch_to_lab_gkh(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.lab_gkh_eval_lt)
