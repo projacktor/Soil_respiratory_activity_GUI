@@ -7,5 +7,6 @@ tester.py
 /ui_template
 /notes.txt
 /Application/main.spec
-/Application/build
+/Application/build/
 unic_code.txt
+**/__pycache__/

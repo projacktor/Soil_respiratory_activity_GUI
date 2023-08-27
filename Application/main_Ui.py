@@ -36,6 +36,7 @@ class MainWindow(object):
         # exel menu buttons
         self.ui.exel_lab_gkh_btn.clicked.connect(self.switch_exel_lab_gkh)
         self.ui.exel_lab_titr_btn.clicked.connect(self.switch_exel_lab_titr)
+        self.ui.exel_field_co2_btn.clicked.connect(self.switch_exel_field_co2)
         # back buttons
         self.ui.lab_gkh_back_home_btn.clicked.connect(self.back_home)
         self.ui.lab_titr_back_home_btn.clicked.connect(self.back_home)
@@ -44,6 +45,7 @@ class MainWindow(object):
         self.ui.exel_back_home_btn.clicked.connect(self.back_home)
         self.ui.exel_lab_gkh_back_btn.clicked.connect(self.back_home)
         self.ui.exel_lab_titr_back_btn.clicked.connect(self.back_home)
+        self.ui.exel_field_co2_back_btn.clicked.connect(self.back_home)
         # input buttons
         self.ui.input_lab_gkh.clicked.connect(self.input_lab_gkh)
         self.ui.input_lab_titr_btn.clicked.connect(self.input_lab_titr)
@@ -52,9 +54,11 @@ class MainWindow(object):
         # load file buttons
         self.ui.exel_lab_gkh_loadfile_btn.clicked.connect(self.exel_lab_gkh_open_file_dialog)
         self.ui.exel_lab_titr_loadfile_btn.clicked.connect(self.exel_lab_titr_open_file_dialog)
+        self.ui.exel_field_co2_loadfile_btn.clicked.connect(self.exel_field_co2_open_file_dialog)
         # calculate buttons
         self.ui.exel_lab_gkh_startcalculate_btn.clicked.connect(self.lab_gkh_calculate_exel_tabel)
-        self.ui.exel_lab_titr_startcalculate_btn.clicked.connect(self.lab_titr_calculate_exel_table())
+        self.ui.exel_lab_titr_startcalculate_btn.clicked.connect(self.lab_titr_calculate_exel_table)
+        self.ui.exel_field_co2_startcalculate_btn.clicked.connect(self.field_co2_calculate_exel_table)
 
     def input_lab_gkh(self):
         # use try-except in order to check user's input
@@ -226,6 +230,15 @@ class MainWindow(object):
             self.ui.exel_lab_titr_filepath_le.clear()
             self.ui.exel_lab_titr_filepath_le.setText("Вы не выбрали файл")
 
+    def exel_field_co2_open_file_dialog(self):
+        filepath = QtWidgets.QFileDialog.getOpenFileName()
+        if filepath[0]:
+            self.ui.exel_field_co2_filepath_le.clear()
+            self.ui.exel_field_co2_filepath_le.setText(filepath[0])
+        else:
+            self.ui.exel_field_co2_filepath_le.clear()
+            self.ui.exel_field_co2_filepath_le.setText("Вы не выбрали файл")
+
     # switch buttons from home page
     def switch_to_lab_gkh(self):
         self.ui.lab_gkh_eval_lt.showFullScreen()
@@ -254,6 +267,9 @@ class MainWindow(object):
     def switch_exel_lab_titr(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.exel_lab_titr_lt)
 
+    def switch_exel_field_co2(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.exel_field_co2_lt)
+
     # calculation buttons
     def lab_gkh_calculate_exel_tabel(self):
         measure = None
@@ -276,6 +292,20 @@ class MainWindow(object):
         elif self.ui.exel_mcg_sq_meters_lab_titr_rb.isChecked():
             measure = "mcgCO2perM2H"
         exf.exel_lab_titr_eval(rf"{self.ui.exel_lab_titr_filepath_le.text()}", measure)
+
+    def field_co2_calculate_exel_table(self):
+        measure = None
+        if self.ui.exel_sq_meters_field_co2_RB.isChecked():
+            measure = "no"
+        elif self.ui.exel_mcg_gram_field_co2_RB.isChecked():
+            measure = "mcgCO2perGH"
+        elif self.ui.exel_mg_gram_field_co2_RB.isChecked():
+            measure = "mgCO2perGH"
+        elif self.ui.exel_g_gram_field_co2_RB.isChecked():
+            measure = "gCO2perGH"
+        elif self.ui.exel_mcg_sq_meters_field_co2_RB.isChecked():
+            measure = "mcgCO2perM2H"
+        exf.exel_field_co2_eval(rf"{self.ui.exel_field_co2_filepath_le.text()}", measure)
 
     # back to home button
     def back_home(self):
