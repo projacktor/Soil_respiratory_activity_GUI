@@ -102,8 +102,40 @@ def exel_field_co2_eval(absoluteFilePath, measure):
 
 # exel_field_co2_eval(r"C:\Users\1234x\OneDrive\Рабочий стол\example_RA\example_RA_field_CO2.xlsx", "no")
 
-def exel_field_gkh(absoluteFilePath, measure):
+def exel_field_gkh_eval(absoluteFilePath, measure):
     wb = xl.load_workbook(rf"{absoluteFilePath}", data_only=True)
     fileName = absoluteFilePath[absoluteFilePath.rfind("\\") + 1:absoluteFilePath.find(".xl")]
     ws = wb[wb.sheetnames[0]]
     resultName = None
+    if measure == "no":
+        resultName = "Итог в гСО₂/(м²*ч)"
+    elif measure == "mcgCO2perGH":
+        resultName = "Итог в мгСО₂/(м²*ч)"
+    elif measure == "mcgCO2perGH":
+        resultName = "Итог в мкгСО₂/(г*ч)"
+    elif measure == "gCO2perGH":
+        resultName = "Итог в гСО₂/(г*ч)"
+    elif measure == "mcgCO2perM2H":
+        resultName = "Итог в мкгСО₂/(м²*ч)"
+    ws["H1"] = resultName
+    position = 2
+    rows = ws.iter_rows(min_row=2, max_row=None, min_col=1, max_col=7)
+    for x, o, h, l1, l2, t, e in rows:
+        ra = evf.field_gkh(x.value, o.value, h.value, l1.value, l2.value, t.value, e.value)
+        if measure == "no":
+            ws[f"H{position}"] = ra
+        elif measure == "mcgCO2perGH":
+            ws[f"H{position}"] = evf.converter_from_GPerM2H_to_GPerGH(ra, "micro")
+        elif measure == "gCO2perGH":
+            ws[f"H{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "no")
+        elif measure == "mgCO2perGH":
+            ws[f"H{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "milli")
+        elif measure == "mcgCO2perM2H":
+            ws[f"H{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "mcgPerM")
+        position += 1
+    newAbsoluteFilePath = absoluteFilePath[:absoluteFilePath.rfind("\\") + 1] + fileName + "_new.xlsx"
+    wb.save(rf"{newAbsoluteFilePath}")
+    del wb
+
+
+# exel_field_gkh_eval(r"C:\Users\1234x\OneDrive\Рабочий стол\example_RA\Example_RA_field_gkh.xlsx", "mcgCO2perGH")
