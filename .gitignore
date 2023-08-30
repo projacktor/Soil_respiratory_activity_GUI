@@ -8,5 +8,6 @@ tester.py
 /notes.txt
 /Application/main.spec
 /Application/build/
+func_test.py
 unic_code.txt
 **/__pycache__/

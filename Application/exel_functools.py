@@ -101,3 +101,9 @@ def exel_field_co2_eval(absoluteFilePath, measure):
 
 
 # exel_field_co2_eval(r"C:\Users\1234x\OneDrive\Рабочий стол\example_RA\example_RA_field_CO2.xlsx", "no")
+
+def exel_field_gkh(absoluteFilePath, measure):
+    wb = xl.load_workbook(rf"{absoluteFilePath}", data_only=True)
+    fileName = absoluteFilePath[absoluteFilePath.rfind("\\") + 1:absoluteFilePath.find(".xl")]
+    ws = wb[wb.sheetnames[0]]
+    resultName = None

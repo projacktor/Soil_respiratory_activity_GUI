@@ -61,6 +61,7 @@ class MainWindow(object):
         self.ui.exel_field_co2_startcalculate_btn.clicked.connect(self.field_co2_calculate_exel_table)
 
     def input_lab_gkh(self):
+        '''TODO: remake functions to more elegant way (one-function pattern)'''
         # use try-except in order to check user's input
         try:
             if all(float(i) for i in [self.ui.cCO2_lab_gkh_hol_le.text(), self.ui.cCO2_lab_gkh_soil_le.text(),
