@@ -65,7 +65,7 @@ class MainWindow(object):
         self.ui.exel_field_gkh_startcalculate_btn.clicked.connect(self.field_gkh_calculate_exel_table)
 
     def input_lab_gkh(self):
-        '''TODO: remake functions to more elegant way (one-function pattern)'''
+
         # use try-except in order to check user's input
         try:
             if all(float(i) for i in [self.ui.cCO2_lab_gkh_hol_le.text(), self.ui.cCO2_lab_gkh_soil_le.text(),
@@ -82,7 +82,11 @@ class MainWindow(object):
                 b2 = float(self.ui.soil_hum_lab_gkh_le.text())
                 e = float(self.ui.inc_time_lab_gkh_le.text())
                 ra = evf.lab_gkh(x, o, b1, t, d, m, b2, e)   # measure in mcgCO2/(g*h)
-                if self.ui.gram_lab_gkh_RB.isChecked():
+                if self.ui.mcg_gram_lab_gkh_RB.isChecked():
+                    self.ui.output_lab_gkh_te.clear()
+                    ra *= 1000
+                    self.ui.output_lab_gkh_te.setText(str(ra))
+                elif self.ui.mg_gram_lab_gkh_RB.isChecked(): # measure in mgCO2/(g*h) - original from formula
                     self.ui.output_lab_gkh_te.clear()
                     self.ui.output_lab_gkh_te.setText(str(ra))
                 elif self.ui.sq_meters_lab_gkh_RB.isChecked():

@@ -2,10 +2,10 @@ from math import pi
 
 
 def lab_gkh(x, o, b1, t, d, m, b2, e):
-    '''TODO: remake formulas'''
-    a_main_var = (((o - x) * b1) / 1_000_000)
-    b_main_var = a_main_var * 1013.25 * 273 / ((1013.25 + d) * (273 + t))
-    ra = (b_main_var * 44 / (22.4 * e * m * (b2 / 100))) * 10
+    # Function returns value in mgC02g-2h-1
+    a_main_var = ((o - x) * b1) / 1_000_000
+    b_main_var = a_main_var * d * 273 / (1013.25 * (273 + t))
+    ra = (b_main_var * 44) / ((22.4 * e) * (m - (b2 / 100)))
     return ra
 # print(lab_gkh(455.7955, 745.718, 18.5, 25.7, 1013.25, 2.33, 20, 17.5))
 

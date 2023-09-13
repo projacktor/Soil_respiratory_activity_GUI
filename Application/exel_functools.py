@@ -3,7 +3,7 @@ import eval_functools as evf
 
 
 def exel_lab_gkh_eval(absoluteFilePath, measure):
-    """TODO: make Message Boxes for each function"""
+    """TODO: make Message Boxes for each function (function that will call MessageBox)"""
     wb = xl.load_workbook(rf"{absoluteFilePath}", data_only=True)
     fileName = absoluteFilePath[absoluteFilePath.rfind("\\")+1:absoluteFilePath.find(".xl")]
     ws = wb[wb.sheetnames[0]]
