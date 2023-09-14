@@ -61,15 +61,14 @@ class MainWindow(object):
         self.ui.exel_field_gkh_loadfile_btn.clicked.connect(self.exel_field_gkh_open_file_dialog)
         # calculate buttons
         self.ui.exel_lab_gkh_startcalculate_btn.clicked.connect(self.lab_gkh_calculate_exel_tabel)
-        #
-        self.ui.exel_lab_gkh_startcalculate_btn.clicked.connect(self.success_message_box)
+        # message box
+        # self.ui.exel_lab_gkh_startcalculate_btn.clicked.connect(self.success_message_box)
         ...
         self.ui.exel_lab_titr_startcalculate_btn.clicked.connect(self.lab_titr_calculate_exel_table)
         self.ui.exel_field_co2_startcalculate_btn.clicked.connect(self.field_co2_calculate_exel_table)
         self.ui.exel_field_gkh_startcalculate_btn.clicked.connect(self.field_gkh_calculate_exel_table)
 
     def input_lab_gkh(self):
-
         # use try-except in order to check user's input
         try:
             if all(float(i) for i in [self.ui.cCO2_lab_gkh_hol_le.text(), self.ui.cCO2_lab_gkh_soil_le.text(),
@@ -298,15 +297,21 @@ class MainWindow(object):
 
     # calculation buttons
     def lab_gkh_calculate_exel_tabel(self):
-        measure = None
-        """TODO: Make any().isCheked to avoid inactivated RB"""
-        if self.ui.exel_mcg_lab_gkh_rb.isChecked():
-            measure = "no"
-        elif self.ui.exel_sq_meters_lab_gkh_rb.isChecked():
-            measure = "gCO2perM2H"
-        elif self.ui.exe_mcg_sq_meters_lab_gkh_rb.isChecked():
-            measure = "mcgCO2perM2H"
-        exf.exel_lab_gkh_eval(rf"{self.ui.exel_lab_gkh_filepath_le.text()}", measure)
+        '''TODO: apply this pattern for other buttons'''
+        if any(i.isChecked() for i in
+               [self.ui.exel_mcg_lab_gkh_rb, self.ui.exel_sq_meters_lab_gkh_rb, self.ui.exe_mcg_sq_meters_lab_gkh_rb]):
+            measure = None
+            if self.ui.exel_mcg_lab_gkh_rb.isChecked():
+                measure = "no"
+            elif self.ui.exel_sq_meters_lab_gkh_rb.isChecked():
+                measure = "gCO2perM2H"
+            elif self.ui.exe_mcg_sq_meters_lab_gkh_rb.isChecked():
+                measure = "mcgCO2perM2H"
+            exf.exel_lab_gkh_eval(rf"{self.ui.exel_lab_gkh_filepath_le.text()}", measure)
+            QtWidgets.QMessageBox.information(self.ui, "Уведомление", "Новый файл будет создан в директории"
+                                                                      " загруженного файла. Вы можете закрыть это окно")
+        else:
+            QtWidgets.QMessageBox.warning(self.ui, "Ошибка", "Вы не выбрали единицу измерения, попробуйте снова")
 
     def lab_titr_calculate_exel_table(self):
         measure = None
@@ -347,12 +352,6 @@ class MainWindow(object):
         elif self.ui.exel_mcg_sq_meters_field_gkh_RB.isChecked():
             measure = "mcgCO2perM2H"
         exf.exel_field_gkh_eval(rf"{self.ui.exel_field_gkh_filepath_le.text()}", measure)
-
-    # MessageBox button
-
-    def success_message_box(self):
-        QtWidgets.QMessageBox.information(self.ui, "Уведомление", "Новый файл будет создан в директории"
-                                                                  " загруженного файла. Вы можете закрыть это окно")
 
     # back to home button
     def back_home(self):
