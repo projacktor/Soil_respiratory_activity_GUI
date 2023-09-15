@@ -61,9 +61,6 @@ class MainWindow(object):
         self.ui.exel_field_gkh_loadfile_btn.clicked.connect(self.exel_field_gkh_open_file_dialog)
         # calculate buttons
         self.ui.exel_lab_gkh_startcalculate_btn.clicked.connect(self.lab_gkh_calculate_exel_tabel)
-        # message box
-        # self.ui.exel_lab_gkh_startcalculate_btn.clicked.connect(self.success_message_box)
-        ...
         self.ui.exel_lab_titr_startcalculate_btn.clicked.connect(self.lab_titr_calculate_exel_table)
         self.ui.exel_field_co2_startcalculate_btn.clicked.connect(self.field_co2_calculate_exel_table)
         self.ui.exel_field_gkh_startcalculate_btn.clicked.connect(self.field_gkh_calculate_exel_table)
@@ -89,7 +86,8 @@ class MainWindow(object):
                     self.ui.output_lab_gkh_te.clear()
                     ra *= 1000
                     self.ui.output_lab_gkh_te.setText(str(ra))
-                elif self.ui.mg_gram_lab_gkh_RB.isChecked(): # measure in mgCO2/(g*h) - original from formula
+                    # measure in mgCO2/(g*h) - original from formula
+                elif self.ui.mg_gram_lab_gkh_RB.isChecked():
                     self.ui.output_lab_gkh_te.clear()
                     self.ui.output_lab_gkh_te.setText(str(ra))
                 elif self.ui.sq_meters_lab_gkh_RB.isChecked():
@@ -225,7 +223,6 @@ class MainWindow(object):
 
     # load file buttons
     def exel_lab_gkh_open_file_dialog(self):
-        """TODO: make error_widgets for errors during handling exel-files"""
         filepath = QtWidgets.QFileDialog.getOpenFileName()
         if filepath[0]:
             self.ui.exel_lab_gkh_filepath_le.clear()
@@ -297,7 +294,6 @@ class MainWindow(object):
 
     # calculation buttons
     def lab_gkh_calculate_exel_tabel(self):
-        '''TODO: apply this pattern for other buttons'''
         if any(i.isChecked() for i in
                [self.ui.exel_mcg_lab_gkh_rb, self.ui.exel_sq_meters_lab_gkh_rb, self.ui.exe_mcg_sq_meters_lab_gkh_rb]):
             measure = None
@@ -308,50 +304,65 @@ class MainWindow(object):
             elif self.ui.exe_mcg_sq_meters_lab_gkh_rb.isChecked():
                 measure = "mcgCO2perM2H"
             exf.exel_lab_gkh_eval(rf"{self.ui.exel_lab_gkh_filepath_le.text()}", measure)
-            QtWidgets.QMessageBox.information(self.ui, "Уведомление", "Новый файл будет создан в директории"
-                                                                      " загруженного файла. Вы можете закрыть это окно")
         else:
             QtWidgets.QMessageBox.warning(self.ui, "Ошибка", "Вы не выбрали единицу измерения, попробуйте снова")
 
     def lab_titr_calculate_exel_table(self):
-        measure = None
-        if self.ui.exel_mg_lab_titr_rb.isChecked():
-            measure = "no"
-        elif self.ui.exel_mcg_lab_titr_rb.isChecked():
-            measure = "mcgCO2perGH"
-        elif self.ui.exel_sq_meters_lab_titr_rb.isChecked():
-            measure = "gCO2perM2H"
-        elif self.ui.exel_mcg_sq_meters_lab_titr_rb.isChecked():
-            measure = "mcgCO2perM2H"
-        exf.exel_lab_titr_eval(rf"{self.ui.exel_lab_titr_filepath_le.text()}", measure)
+        if any(i.isChecked() for i in
+               [self.ui.exel_mg_lab_titr_rb, self.ui.exel_mcg_lab_titr_rb,
+                self.ui.exel_sq_meters_lab_titr_rb, self.ui.exel_mcg_sq_meters_lab_titr_rb]):
+            measure = None
+            if self.ui.exel_mg_lab_titr_rb.isChecked():
+                measure = "no"
+            elif self.ui.exel_mcg_lab_titr_rb.isChecked():
+                measure = "mcgCO2perGH"
+            elif self.ui.exel_sq_meters_lab_titr_rb.isChecked():
+                measure = "gCO2perM2H"
+            elif self.ui.exel_mcg_sq_meters_lab_titr_rb.isChecked():
+                measure = "mcgCO2perM2H"
+            exf.exel_lab_titr_eval(rf"{self.ui.exel_lab_titr_filepath_le.text()}", measure)
+        else:
+            QtWidgets.QMessageBox.warning(self.ui, "Ошибка", "Вы не выбрали единицу измерения, попробуйте снова")
 
     def field_co2_calculate_exel_table(self):
-        measure = None
-        if self.ui.exel_sq_meters_field_co2_RB.isChecked():
-            measure = "no"
-        elif self.ui.exel_mcg_gram_field_co2_RB.isChecked():
-            measure = "mcgCO2perGH"
-        elif self.ui.exel_mg_gram_field_co2_RB.isChecked():
-            measure = "mgCO2perGH"
-        elif self.ui.exel_g_gram_field_co2_RB.isChecked():
-            measure = "gCO2perGH"
-        elif self.ui.exel_mcg_sq_meters_field_co2_RB.isChecked():
-            measure = "mcgCO2perM2H"
-        exf.exel_field_co2_eval(rf"{self.ui.exel_field_co2_filepath_le.text()}", measure)
-
+        if any(i.isChecked() for i in
+               [self.ui.exel_sq_meters_field_co2_RB, self.ui.exel_mcg_gram_field_co2_RB,
+                self.ui.exel_mg_gram_field_co2_RB, self.ui.exel_g_gram_field_co2_RB,
+                self.ui.exel_mcg_sq_meters_field_co2_RB]):
+            measure = None
+            if self.ui.exel_sq_meters_field_co2_RB.isChecked():
+                measure = "no"
+            elif self.ui.exel_mcg_gram_field_co2_RB.isChecked():
+                measure = "mcgCO2perGH"
+            elif self.ui.exel_mg_gram_field_co2_RB.isChecked():
+                measure = "mgCO2perGH"
+            elif self.ui.exel_g_gram_field_co2_RB.isChecked():
+                measure = "gCO2perGH"
+            elif self.ui.exel_mcg_sq_meters_field_co2_RB.isChecked():
+                measure = "mcgCO2perM2H"
+            exf.exel_field_co2_eval(rf"{self.ui.exel_field_co2_filepath_le.text()}", measure)
+        else:
+            QtWidgets.QMessageBox.warning(self.ui, "Ошибка", "Вы не выбрали единицу измерения, попробуйте снова")
+    '''TODO: without file load error'''
     def field_gkh_calculate_exel_table(self):
-        measure = None
-        if self.ui.exel_sq_meters_field_gkh_RB.isChecked():
-            measure = "no"
-        elif self.ui.exel_mcg_gram_field_gkh_RB.isChecked():
-            measure = "mcgCO2perGH"
-        elif self.ui.exel_mg_gram_field_gkh_RB.isChecked():
-            measure = "mgCO2perGH"
-        elif self.ui.exel_g_gram_field_gkh_RB.isChecked():
-            measure = "gCO2perGH"
-        elif self.ui.exel_mcg_sq_meters_field_gkh_RB.isChecked():
-            measure = "mcgCO2perM2H"
-        exf.exel_field_gkh_eval(rf"{self.ui.exel_field_gkh_filepath_le.text()}", measure)
+        if any(i.isChecked() for i in
+               [self.ui.exel_sq_meters_field_gkh_RB, self.ui.exel_mcg_gram_field_gkh_RB,
+                self.ui.exel_mg_gram_field_gkh_RB, self.ui.exel_g_gram_field_gkh_RB,
+                self.ui.exel_mcg_sq_meters_field_gkh_RB]):
+            measure = None
+            if self.ui.exel_sq_meters_field_gkh_RB.isChecked():
+                measure = "no"
+            elif self.ui.exel_mcg_gram_field_gkh_RB.isChecked():
+                measure = "mcgCO2perGH"
+            elif self.ui.exel_mg_gram_field_gkh_RB.isChecked():
+                measure = "mgCO2perGH"
+            elif self.ui.exel_g_gram_field_gkh_RB.isChecked():
+                measure = "gCO2perGH"
+            elif self.ui.exel_mcg_sq_meters_field_gkh_RB.isChecked():
+                measure = "mcgCO2perM2H"
+            exf.exel_field_gkh_eval(rf"{self.ui.exel_field_gkh_filepath_le.text()}", measure)
+        else:
+            QtWidgets.QMessageBox.warning(self.ui, "Ошибка", "Вы не выбрали единицу измерения, попробуйте снова")
 
     # back to home button
     def back_home(self):

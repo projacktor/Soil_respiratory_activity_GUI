@@ -1535,7 +1535,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(6)
+        self.stackedWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -1546,15 +1546,15 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.lab_titr_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в лабораторных условиях методом титрования"))
         self.field_co2_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в полевых условиях на анализаторе СО₂"))
         self.field_gkh_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в полевых условиях на газовом хроматогрофе"))
-        self.exel_menu_btn.setText(_translate("MainWindow", "Загрузить EXEL таблицу"))
-        self.int_exel.setText(_translate("MainWindow", "На данной странице вы можете загрузить EXEL таблицу с измерениями респераторной активности.  Выберите использованный вами метод."))
+        self.exel_menu_btn.setText(_translate("MainWindow", "Загрузить EXCEL таблицу"))
+        self.int_exel.setText(_translate("MainWindow", "На данной странице вы можете загрузить EXCEL таблицу с измерениями респераторной активности.  Выберите использованный вами метод."))
         self.exel_field_co2_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в полевых условиях на анализаторе СО₂"))
         self.exel_back_home_btn.setText(_translate("MainWindow", "Вернуться назад"))
         self.exel_field_gkh_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в полевых условиях на газовом хроматогрофе"))
         self.exel_lab_titr_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в лабораторных условиях методом титрования"))
         self.exel_lab_gkh_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в лабораторных условиях на газовом хроматографе"))
-        self.exel_lab_gkh_intro_lbl.setText(_translate("MainWindow", "Вы выбрали загрузку Exel-таблицы для респираторной активности в условиях лаборатории с использованием газового хроматографа\n"
-"Сначал выберите единицу измерения для подсчета респираторной активности, а затем загрузите exal-файл нажав на кнопку \"Загрузить файл\" \n"
+        self.exel_lab_gkh_intro_lbl.setText(_translate("MainWindow", "Вы выбрали загрузку Excel-таблицы для респираторной активности в условиях лаборатории с использованием газового хроматографа\n"
+"Сначал выберите единицу измерения для подсчета респираторной активности, а затем загрузите excel-файл нажав на кнопку \"Загрузить файл\" \n"
 "Обратите внимание: Таблица должна быть записанна по образцу, а также перед загрузкой файла сохраните и закройте таблицу\n"
 "В новом файле в крайнем правом столбце появятся итоговые результаты в выбранных единицах измерения"))
         self.exel_lab_gkh_example_lbl.setText(_translate("MainWindow", "Образец"))
@@ -1565,8 +1565,8 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.exel_sq_meters_lab_gkh_rb.setText(_translate("MainWindow", "гСО₂/(м²*ч)"))
         self.exel_mcg_lab_gkh_rb.setText(_translate("MainWindow", "мкгСО₂/(г*ч)"))
         self.exe_mcg_sq_meters_lab_gkh_rb.setText(_translate("MainWindow", "мкгСО₂/(м²*ч)"))
-        self.exel_lab_titr_intro_lbl.setText(_translate("MainWindow", "Вы выбрали загрузку Exel-таблицы для респираторной активности в условиях лаборатории с использованием метода титрования\n"
-"Сначал выберите единицу измерения для подсчета респираторной активности, а затем загрузите exal-файл нажав на кнопку \"Загрузить файл\" \n"
+        self.exel_lab_titr_intro_lbl.setText(_translate("MainWindow", "Вы выбрали загрузку Excel-таблицы для респираторной активности в условиях лаборатории с использованием метода титрования\n"
+"Сначал выберите единицу измерения для подсчета респираторной активности, а затем загрузите excel-файл нажав на кнопку \"Загрузить файл\" \n"
 "Обратите внимание: Таблица должна быть записанна по образцу, а также перед загрузкой файла сохраните и закройте таблицу\n"
 "В новом файле в крайнем правом столбце появятся итоговые результаты в выбранных единицах измерения"))
         self.exel_lab_titr_example_lbl.setText(_translate("MainWindow", "Образец"))
@@ -1578,8 +1578,8 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.exel_mcg_lab_titr_rb.setText(_translate("MainWindow", "мкгСО₂/(г*ч)"))
         self.exel_sq_meters_lab_titr_rb.setText(_translate("MainWindow", "гСО₂/(м²*ч)"))
         self.exel_mg_lab_titr_rb.setText(_translate("MainWindow", "мгСО₂/(г*ч)"))
-        self.exel_field_co2_intro_lbl.setText(_translate("MainWindow", "Вы выбрали загрузку Exel-таблицы для респираторной активности в полевых условиях с использованием анализаторе СО₂\n"
-"Сначал выберите единицу измерения для подсчета респираторной активности, а затем загрузите exal-файл нажав на кнопку \"Загрузить файл\" \n"
+        self.exel_field_co2_intro_lbl.setText(_translate("MainWindow", "Вы выбрали загрузку Excel-таблицы для респираторной активности в полевых условиях с использованием анализаторе СО₂\n"
+"Сначал выберите единицу измерения для подсчета респираторной активности, а затем загрузите excel-файл нажав на кнопку \"Загрузить файл\" \n"
 "Обратите внимание: Таблица должна быть записанна по образцу, а также перед загрузкой файла сохраните и закройте таблицу\n"
 "В новом файле в крайнем правом столбце появятся итоговые результаты в выбранных единицах измерения"))
         self.exel_field_co2_example_lbl.setText(_translate("MainWindow", "Образец"))
@@ -1592,8 +1592,8 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.exel_mcg_sq_meters_field_co2_RB.setText(_translate("MainWindow", "мкгСО₂/(м²*ч)"))
         self.exel_g_gram_field_co2_RB.setText(_translate("MainWindow", "гСО₂/(г*ч)"))
         self.exel_mcg_gram_field_co2_RB.setText(_translate("MainWindow", "мкгСО₂/(г*ч)"))
-        self.exel_field_gkh_intro_lbl.setText(_translate("MainWindow", "Вы выбрали загрузку Exel-таблицы для респираторной активности в полевых условиях с использованием анализаторе СО₂\n"
-"Сначал выберите единицу измерения для подсчета респираторной активности, а затем загрузите exal-файл нажав на кнопку \"Загрузить файл\" \n"
+        self.exel_field_gkh_intro_lbl.setText(_translate("MainWindow", "Вы выбрали загрузку Exсel-таблицы для респираторной активности в полевых условиях на портативном газовом хроматографе\n"
+"Сначал выберите единицу измерения для подсчета респираторной активности, а затем загрузите excel-файл нажав на кнопку \"Загрузить файл\" \n"
 "Обратите внимание: Таблица должна быть записанна по образцу, а также перед загрузкой файла сохраните и закройте таблицу\n"
 "В новом файле в крайнем правом столбце появятся итоговые результаты в выбранных единицах измерения"))
         self.exel_field_gkh_startcalculate_btn.setText(_translate("MainWindow", "Начать рассчет"))

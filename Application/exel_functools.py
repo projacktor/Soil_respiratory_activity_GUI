@@ -1,9 +1,12 @@
 import openpyxl as xl
+
 import eval_functools as evf
+
+from PyQt5.QtWidgets import QMessageBox
+from App_UI import Ui_MainWindow
 
 
 def exel_lab_gkh_eval(absoluteFilePath, measure):
-    """TODO: make Message Boxes for each function (function that will call MessageBox)"""
     wb = xl.load_workbook(rf"{absoluteFilePath}", data_only=True)
     fileName = absoluteFilePath[absoluteFilePath.rfind("\\")+1:absoluteFilePath.find(".xl")]
     ws = wb[wb.sheetnames[0]]
@@ -18,7 +21,6 @@ def exel_lab_gkh_eval(absoluteFilePath, measure):
     position = 2
     rows = ws.iter_rows(min_row=2, max_row=None, min_col=1, max_col=8)
     for x, o, b1, t, d, m, b2, e in rows:
-        # (x, o, b1, t, d, m, b2, e)
         ra = evf.lab_gkh(x.value, o.value, b1.value, t.value, d.value, m.value, b2.value, e.value)
         if measure == "no":
             ws[f"I{position}"] = ra
@@ -29,6 +31,8 @@ def exel_lab_gkh_eval(absoluteFilePath, measure):
         position += 1
     newAbsoluteFilePath = absoluteFilePath[:absoluteFilePath.rfind("\\")+1] + fileName + "_new.xlsx"
     wb.save(rf"{newAbsoluteFilePath}")
+    QMessageBox.information(Ui_MainWindow(), "Уведомление", "Новый файл будет создан в директории"
+                                                              " загруженного файла. Вы можете закрыть это окно")
     del wb
 
 
@@ -61,6 +65,8 @@ def exel_lab_titr_eval(absoluteFilePath, measure):
         position += 1
     newAbsoluteFilePath = absoluteFilePath[:absoluteFilePath.rfind("\\") + 1] + fileName + "_new.xlsx"
     wb.save(rf"{newAbsoluteFilePath}")
+    QMessageBox.information(Ui_MainWindow(), "Уведомление", "Новый файл будет создан в директории"
+                                                              " загруженного файла. Вы можете закрыть это окно")
     del wb
 
 
@@ -97,10 +103,10 @@ def exel_field_co2_eval(absoluteFilePath, measure):
         position += 1
     newAbsoluteFilePath = absoluteFilePath[:absoluteFilePath.rfind("\\") + 1] + fileName + "_new.xlsx"
     wb.save(rf"{newAbsoluteFilePath}")
+    QMessageBox.information(Ui_MainWindow(), "Уведомление", "Новый файл будет создан в директории"
+                                                            " загруженного файла. Вы можете закрыть это окно")
     del wb
 
-
-# exel_field_co2_eval(r"C:\Users\1234x\OneDrive\Рабочий стол\example_RA\example_RA_field_CO2.xlsx", "no")
 
 def exel_field_gkh_eval(absoluteFilePath, measure):
     wb = xl.load_workbook(rf"{absoluteFilePath}", data_only=True)
@@ -135,7 +141,6 @@ def exel_field_gkh_eval(absoluteFilePath, measure):
         position += 1
     newAbsoluteFilePath = absoluteFilePath[:absoluteFilePath.rfind("\\") + 1] + fileName + "_new.xlsx"
     wb.save(rf"{newAbsoluteFilePath}")
+    QMessageBox.information(Ui_MainWindow(), "Уведомление", "Новый файл будет создан в директории"
+                                                            " загруженного файла. Вы можете закрыть это окно")
     del wb
-
-
-# exel_field_gkh_eval(r"C:\Users\1234x\OneDrive\Рабочий стол\example_RA\Example_RA_field_gkh.xlsx", "mcgCO2perGH")
