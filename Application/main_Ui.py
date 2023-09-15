@@ -9,7 +9,6 @@ import exel_functools as exf
 
 # GUI executable class
 class MainWindow(object):
-    """TODO: make a chunk for message_box connecting"""
     """TODO: make src files for img"""
     def __init__(self):
         super().__init__()
