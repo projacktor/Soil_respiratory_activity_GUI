@@ -3,7 +3,8 @@ from PyQt5 import QtWidgets
 
 # Additional modules import
 from App_UI import Ui_MainWindow
-from Application.functools import exel_functools as exf, eval_functools as evf
+import exel_functools as exf
+import eval_functools as evf
 
 
 # GUI executable class
