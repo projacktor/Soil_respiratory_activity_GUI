@@ -3,32 +3,31 @@ from math import pi
 
 def lab_gkh(x, o, b1, t, d, m, b2, e):
     # Function returns value in mgC02g-2h-1
-    a_main_var = ((o - x) * b1) / 1_000_000
-    b_main_var = a_main_var * d * 273 / (1013.25 * (273 + t))
-    ra = (b_main_var * 44) / ((22.4 * e) * (m - (b2 / 100)))
+    a = ((o - x) * b1) / 1_000_000
+    b = a * d * 273 / (1013.25 * (273 + t))
+    ra = (b * 44) / ((22.4 * e) * (m - (b2 / 100)))
     return ra
-# print(lab_gkh(455.7955, 745.718, 18.5, 25.7, 1013.25, 2.33, 20, 17.5))
 
 
 def lab_titr(x, o, m, e):
-    RA = 2.2 * ((x - o) / (e * m))
-    return RA
+    ra = 2.2 * ((x - o) / (e * m))
+    return ra
 
 
 def field_co2(x, o, h, d, t, e):
     A = 0.001 * h * ((pi * d**2) / 4) * (o - x) / (0.0821 * (273 + t))
     B = A / e
     C = B * 12 * 60 / 10**-6
-    RA = 10**4 * C / ((pi * d**2) / 4)
-    return RA
+    ra = 10**4 * C / ((pi * d**2) / 4)
+    return ra
 
 
 def field_gkh(x, o, h, l1, l2, t, e):
     A = 10**-3 * h * l1 * l2 * (o - x) / (0.0821 * (273 + t))
     B = A / e
     C = B * 12 * 60 / 10**6
-    RA = 10**4 * C / (l1 * l2)
-    return RA
+    ra = 10**4 * C / (l1 * l2)
+    return ra
 
 
 def converter_from_GPerGH_to_GPerM2H(measure, power):

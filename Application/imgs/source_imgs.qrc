@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="lab_gkh">
+    <file>example_ra_lab_gkh_example.png</file>
+  </qresource>
+  <qresource prefix="field_gkh">
+    <file>example_ra_field_gkh.png</file>
+  </qresource>
+  <qresource prefix="filed_co2">
+    <file>example_ra_field_co2.png</file>
+  </qresource>
+  <qresource prefix="lab_titr">
+    <file>example_ra_lab_titr.png</file>
+  </qresource>
+</RCC>
