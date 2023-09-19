@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Full.ui'
+# Form implementation generated from reading ui file 'Main_UI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -11,11 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(QtWidgets.QWidget):
+class Ui_MainWindow(QtWidgets.QMainWindow):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1257, 740)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icon/bacteria_icon.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet("background-color: rgb(194, 194, 194);")
+        MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
@@ -1484,12 +1488,12 @@ class Ui_MainWindow(QtWidgets.QWidget):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Respiratory activity"))
         self.intro_lbl.setText(_translate("MainWindow", "Добро пожаловать! Вы находитесь в программе для расчета почвенной респираторной активности. Выберите использованный вами метод."))
         self.lab_gkh_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в лабораторных условиях на газовом хроматографе"))
         self.lab_titr_btn.setText(_translate("MainWindow", "Респираторная активность почвы, определенная в лабораторных условиях методом титрования"))
@@ -1638,6 +1642,7 @@ class Ui_MainWindow(QtWidgets.QWidget):
         self.input_field_gkh_btn.setText(_translate("MainWindow", "Ввод"))
         self.field_gkh_back_home_btn.setText(_translate("MainWindow", "Назад в меню"))
 
+import source_icon_rc
 import source_imgs_rc
 
 

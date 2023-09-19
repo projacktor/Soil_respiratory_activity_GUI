@@ -1,9 +1,9 @@
 import openpyxl as xl
 
-import eval_functools as evf
+import Application.functools.eval_functools as evf
 
 from PyQt5.QtWidgets import QMessageBox
-from App_UI import Ui_MainWindow
+from Application.App_UI import Ui_MainWindow
 
 
 def exel_lab_gkh_eval(absoluteFilePath, measure):

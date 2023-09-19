@@ -7,9 +7,9 @@ tester.py
 /ui_template
 /notes.txt
 /Application/main.spec
-/Application/build/
+/old versions/build/
 func_test.py
 unic_code.txt
 **/__pycache__/
 uipy.sh
-/ui_template/old versions
+/old versions

@@ -3,13 +3,11 @@ from PyQt5 import QtWidgets
 
 # Additional modules import
 from App_UI import Ui_MainWindow
-import eval_functools as evf
-import exel_functools as exf
+from Application.functools import exel_functools as exf, eval_functools as evf
 
 
 # GUI executable class
-class MainWindow(object):
-    """TODO: make src files for img"""
+class MainWindow(QtWidgets.QStackedWidget, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.main_window = QtWidgets.QMainWindow()
@@ -304,7 +302,7 @@ class MainWindow(object):
                 measure = "mcgCO2perM2H"
             exf.exel_lab_gkh_eval(rf"{self.ui.exel_lab_gkh_filepath_le.text()}", measure)
         else:
-            QtWidgets.QMessageBox.warning(self.ui, "Ошибка", "Вы не выбрали единицу измерения, попробуйте снова")
+            QtWidgets.QMessageBox.warning(self, "Ошибка", "Вы не выбрали единицу измерения, попробуйте снова")
 
     def lab_titr_calculate_exel_table(self):
         if any(i.isChecked() for i in
@@ -342,7 +340,7 @@ class MainWindow(object):
             exf.exel_field_co2_eval(rf"{self.ui.exel_field_co2_filepath_le.text()}", measure)
         else:
             QtWidgets.QMessageBox.warning(self.ui, "Ошибка", "Вы не выбрали единицу измерения, попробуйте снова")
-    '''TODO: without file load error'''
+
     def field_gkh_calculate_exel_table(self):
         if any(i.isChecked() for i in
                [self.ui.exel_sq_meters_field_gkh_RB, self.ui.exel_mcg_gram_field_gkh_RB,
