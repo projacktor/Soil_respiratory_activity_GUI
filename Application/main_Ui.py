@@ -296,7 +296,7 @@ class MainWindow(QtWidgets.QStackedWidget, Ui_MainWindow):
                [self.ui.exel_mcg_lab_gkh_rb, self.ui.exel_sq_meters_lab_gkh_rb, self.ui.exe_mcg_sq_meters_lab_gkh_rb]):
             measure = None
             if self.ui.exel_mcg_lab_gkh_rb.isChecked():
-                measure = "no"
+                measure = "mcgCO2perGH"
             elif self.ui.exel_sq_meters_lab_gkh_rb.isChecked():
                 measure = "gCO2perM2H"
             elif self.ui.exe_mcg_sq_meters_lab_gkh_rb.isChecked():
