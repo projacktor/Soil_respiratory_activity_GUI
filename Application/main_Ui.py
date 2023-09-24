@@ -89,13 +89,13 @@ class MainWindow(QtWidgets.QStackedWidget, Ui_MainWindow):
                     self.ui.output_lab_gkh_te.clear()
                     self.ui.output_lab_gkh_te.setText(str(ra))
                 elif self.ui.sq_meters_lab_gkh_RB.isChecked():
-                    # function that will convert mcg_of_CO2/(gr*h) to g_of_CO2/(m2*h)
-                    ra = evf.converter_from_GPerGH_to_GPerM2H(ra, "micro")
+                    # function that will convert mg_of_CO2/(gr*h) to g_of_CO2/(m2*h)
+                    ra = evf.converter_from_GPerGH_to_GPerM2H(ra, "milli")
                     self.ui.output_lab_gkh_te.clear()
                     self.ui.output_lab_gkh_te.setText(str(ra))
-                elif self.ui.mcg_sq_meters_lab_gkh_RB.isChecked():   # convert mcgCO2/(g*h) to mcgCO2/(m2*h)
+                elif self.ui.mcg_sq_meters_lab_gkh_RB.isChecked():   # convert mgCO2/(g*h) to mcgCO2/(m2*h)
                     self.ui.output_lab_gkh_te.clear()
-                    ra = evf.converter_from_GPerGH_to_GPerM2H(ra, "no")
+                    ra = evf.converter_from_GPerGH_to_GPerM2H(ra, "milli") * 10**6
                     self.ui.output_lab_gkh_te.setText(str(ra))
         except ValueError:
             self.ui.output_lab_gkh_te.clear()
@@ -125,7 +125,7 @@ class MainWindow(QtWidgets.QStackedWidget, Ui_MainWindow):
                     self.ui.output_lab_titr_te.append(str(ra))
                 elif self.ui.mcg_sq_meters_lab_titr_RB.isChecked():  # convert mgCO2/(g*h)to mcgCo2/(m2 * h)
                     self.ui.output_lab_titr_te.clear()
-                    ra = evf.converter_from_GPerGH_to_GPerM2H(ra, "mcgPerM")
+                    ra = evf.converter_from_GPerGH_to_GPerM2H(ra, "milli") * 10**6
                     self.ui.output_lab_titr_te.append(str(ra))
 
         except ValueError:

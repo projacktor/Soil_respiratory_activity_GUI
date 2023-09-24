@@ -26,14 +26,14 @@ def exel_lab_gkh_eval(absoluteFilePath, measure):
         ra = evf.lab_gkh(x.value, o.value, b1.value, t.value, d.value, m.value, b2.value, e.value)
         # the condition for converting to selected unit of measure
         if measure == "mcgCO2perGH":
-            # converting via evf module (from default output to mcgCO2**(-2)h**(-1))
+            # converting via evf module (from default output to mcgCO2g**(-1)h**(-1))
             ws[f"I{position}"] = ra * 10**3
         elif measure == "gCO2perM2H":
             # converting via evf module (from default output to gCO2m**(-2)h**(-1))
-            ws[f"I{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "micro")
+            ws[f"I{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "milli")
         elif measure == "mcgCO2perM2H":
             # converting via evf module (from default output to mcgCO2m**(-2)h**(-1))
-            ws[f"I{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "no")
+            ws[f"I{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "milli") * 10**6
         position += 1   # change the position of the output cell
 
     # creating new file with output values
@@ -45,7 +45,7 @@ def exel_lab_gkh_eval(absoluteFilePath, measure):
     del wb
 
 
-# function for calculating RA in lab using titration method (default output value in gC02m**(-2)h**(-1))
+# function for calculating RA in lab using titration method (default output value in mgC02g**(-1)h**(-1))
 def exel_lab_titr_eval(absoluteFilePath, measure):
     wb = xl.load_workbook(rf"{absoluteFilePath}", data_only=True)
     fileName = absoluteFilePath[absoluteFilePath.rfind("\\")+1:absoluteFilePath.find(".xl")]
@@ -65,12 +65,16 @@ def exel_lab_titr_eval(absoluteFilePath, measure):
     for x, o, m, e in rows:
         ra = evf.lab_titr(x.value, o.value, m.value, e.value)
         if measure == "no":
+            # no converting, it is default output
             ws[f"E{position}"] = ra
         elif measure == "mcgCO2perGH":
+            # converting via evf module (from default output to mcgCO2g**(-1)h**(-1))
             ws[f"E{position}"] = ra * 10**3
         elif measure == "gCO2perM2H":
+            # converting via evf module (from default output to gCO2m**(-2)h**(-1))
             ws[f"E{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "milli")
         elif measure == "mcgCO2perM2H":
+            # converting via evf module (from default output to mcgCO2m**(-2)h**(-1))
             ws[f"E{position}"] = evf.converter_from_GPerGH_to_GPerM2H(ra, "milli") * 10**6
         position += 1
     newAbsoluteFilePath = absoluteFilePath[:absoluteFilePath.rfind("\\") + 1] + fileName + "_new.xlsx"
@@ -111,7 +115,7 @@ def exel_field_co2_eval(absoluteFilePath, measure):
         elif measure == "mgCO2perGH":
             ws[f"G{position}"] = evf.converter_from_GPerM2H_to_GPerGH(ra, "milli")
         elif measure == "mcgCO2perM2H":
-            ws[f"G{position}"] = evf.converter_from_GPerM2H_to_GPerGH(ra, "mcgPerM")
+            ws[f"G{position}"] = ra * 10**6    # evf.converter_from_GPerM2H_to_GPerGH(ra, "mcgPerM")
         position += 1
     newAbsoluteFilePath = absoluteFilePath[:absoluteFilePath.rfind("\\") + 1] + fileName + "_new.xlsx"
     wb.save(rf"{newAbsoluteFilePath}")
@@ -151,7 +155,7 @@ def exel_field_gkh_eval(absoluteFilePath, measure):
         elif measure == "mgCO2perGH":
             ws[f"H{position}"] = evf.converter_from_GPerM2H_to_GPerGH(ra, "milli")
         elif measure == "mcgCO2perM2H":
-            ws[f"H{position}"] = evf.converter_from_GPerM2H_to_GPerGH(ra, "mcgPerM")
+            ws[f"H{position}"] = ra * 10**6    # evf.converter_from_GPerM2H_to_GPerGH(ra, "mcgPerM")
         position += 1
     newAbsoluteFilePath = absoluteFilePath[:absoluteFilePath.rfind("\\") + 1] + fileName + "_new.xlsx"
     wb.save(rf"{newAbsoluteFilePath}")

@@ -45,14 +45,14 @@ def converter_from_GPerGH_to_GPerM2H(measure, power):
         # this condition converts RA in mcgCO2*g**(-1)*h**(-1) to gCO2*m**(-2)*h**(-1)
         converted = measure * 3 * 10**11
     elif power == "milli":
-        # this condition converts RA in mcgCO2*g**(-1)*h**(-1) to gCO2*m**(-2)*h**(-1)
+        # this condition converts RA in mgCO2*g**(-1)*h**(-1) to gCO2*m**(-2)*h**(-1)
         converted = measure * 3 * 10**8
     elif power == "no":
         # this condition converts RA in gCO2*g**(-1)*h**(-1) to gCO2*m**(-2)*h**(-1)
         converted = measure * 3 * 10**5
-    elif power == "mcgPerM":
-        # this condition converts RA in gCO2*g**(-1)*h**(-1) to mcgCO2*m**(-2)*h**(-1)
-        converted = measure * 3 * 10**5 * 10**6
+    # elif power == "mcgPerM":
+    #     # this condition converts RA in gCO2*g**(-1)*h**(-1) to mcgCO2*m**(-2)*h**(-1)
+    #     converted = measure * 3 * 10**5 * 10**6
     else:
         print("Process finished with exit code 1")
     return converted
@@ -69,8 +69,9 @@ def converter_from_GPerM2H_to_GPerGH(measure, power):
         # this condition converts RA in gCO2*m**(-2)*h**(-1) to mcgCO2*g**(-1)*h**(-1)
         converted = measure * 3 * 10**(-8)
     elif power == "no":
-        # this condition converts RA in gCO2*m**(-2)*h**(-1) to mcgCO2*g**(-1)*h**(-1)
+        # this condition converts RA in gCO2*m**(-2)*h**(-1) to gCO2*g**(-1)*h**(-1)
         converted = measure * 3 * 10**(-5)
+
     else:
         print("Process finished with exit code 1")
     return converted
