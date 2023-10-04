@@ -44,7 +44,7 @@ after the loading.
 ![comp-exel-working](Md%20imgs/excel-working_compl-screen.png)
 ***
 The application was created using PyQt5 for GUI creating and OpenPyXl for working with Excel. The application was created for
-Kazan Federal University researches and has state registration - <a href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=EVM&rn=6295&DocNumber=2023669585&TypeFile=html"> State registration </a>
+Kazan Federal University researches and has state registration - <a href="https://new.fips.ru/registers-doc-view/fips_servlet?DB=EVM&rn=6295&DocNumber=2023669585&TypeFile=html"> State registratio </a>
 
 ![Qt](Md%20imgs/icons8-qt.svg)
 <img src="Md imgs/microsoft_office_excel_logo_icon_145720.ico" alt="drawing" width="50">
