@@ -6,10 +6,16 @@ tester.py
 /old versions/unic_code.txt
 /ui_template
 /notes.txt
-/Application/main.spec
+/Soil_respiratory_activity_GUI/main.spec
 /old versions/build/
 func_test.py
 old versions/unic_code.txt
 **/__pycache__/
 uipy.sh
 /old versions
+
+/pyvenv.cfg
+**/bin/
+**/include/
+**/lib64/
+**/lib/

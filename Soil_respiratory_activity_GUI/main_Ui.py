@@ -2,7 +2,7 @@
 from PyQt5 import QtWidgets
 
 # Additional modules import
-from App_UI import Ui_MainWindow
+from app_UI import Ui_MainWindow
 import exel_functools as exf
 import eval_functools as evf
 

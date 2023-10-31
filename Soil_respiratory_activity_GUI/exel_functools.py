@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 # load internal modules
 import eval_functools as evf
-from App_UI import Ui_MainWindow
+from app_UI import Ui_MainWindow
 
 
 # a function for calculating RA in lab using gas chromatograph (default output value in mgC02g**(-1)h**(-1))
