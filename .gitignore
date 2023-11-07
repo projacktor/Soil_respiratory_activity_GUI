@@ -17,5 +17,5 @@ uipy.sh
 /pyvenv.cfg
 **/bin/
 **/include/
-**/lib64/
+/lib64/
 **/lib/
