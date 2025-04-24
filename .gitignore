@@ -19,3 +19,5 @@ uipy.sh
 **/include/
 /lib64/
 **/lib/
+.vscode
+.idea
