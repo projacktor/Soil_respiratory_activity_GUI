@@ -269,7 +269,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.exel_lab_titr_photo_lbl.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.exel_lab_titr_photo_lbl.setStyleSheet("image: url(:/lab_titr/example_ra_lab_titr.png);")
         self.exel_lab_titr_photo_lbl.setText("")
-        self.exel_lab_titr_photo_lbl.setPixmap(QtGui.QPixmap("../Soil_respiratory_activity_GUI/exampl_imgs/example_RA_lab_titr.png"))
+        self.exel_lab_titr_photo_lbl.setPixmap(QtGui.QPixmap("../src/exampl_imgs/example_RA_lab_titr.png"))
         self.exel_lab_titr_photo_lbl.setAlignment(QtCore.Qt.AlignCenter)
         self.exel_lab_titr_photo_lbl.setWordWrap(True)
         self.exel_lab_titr_photo_lbl.setObjectName("exel_lab_titr_photo_lbl")

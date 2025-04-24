@@ -6,7 +6,7 @@ tester.py
 /old versions/unic_code.txt
 /ui_template
 /notes.txt
-/Soil_respiratory_activity_GUI/main.spec
+/src/main.spec
 /old versions/build/
 func_test.py
 old versions/unic_code.txt
@@ -21,3 +21,5 @@ uipy.sh
 **/lib/
 .vscode
 .idea
+dist
+build
