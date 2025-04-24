@@ -3,7 +3,7 @@ import openpyxl as xl
 from PyQt5.QtWidgets import QMessageBox
 
 # load internal modules
-import eval_functools as evf
+from src.functions import eval_functools as evf
 from app_UI import Ui_MainWindow
 
 

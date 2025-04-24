@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from main_Ui import MainWindow
+from src.ui.main_Ui import MainWindow
 
 
 def main():
